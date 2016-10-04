@@ -1,0 +1,6 @@
+<widget>
+  <widgetClass>tooltwist.ttdemo.widgets.KelvinWidget</widgetClass>
+  <idWithinRootWidget>0</idWithinRootWidget>
+  <label>kelvin</label>
+  <description>Kelvin</description>
+</widget>

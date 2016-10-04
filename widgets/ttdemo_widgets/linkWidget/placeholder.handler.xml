@@ -1,0 +1,4 @@
+<requestHandler>
+	<class>tooltwist.cloudmall.requestHandlers.PlaceholderRequestHandler</class>
+	<description>Placeholder Request Handler</description>
+</requestHandler>

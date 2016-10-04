@@ -1,0 +1,6 @@
+<widget>
+  <widgetClass>tooltwist.ttdemo.widgets.QweqweWidget</widgetClass>
+  <idWithinRootWidget>0</idWithinRootWidget>
+  <label>qwqw</label>
+  <description>qw</description>
+</widget>

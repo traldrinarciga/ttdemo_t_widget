@@ -1,0 +1,30 @@
+<widget>
+  <toolboxCategory></toolboxCategory>
+  <widgetClass>com.tooltwist.ttdemo.widgets.HelloWorldWidget</widgetClass>
+  <viewHelper>com.tooltwist.ttdemo.viewHelpers.HelloWorldViewHelper</viewHelper>
+  <idWithinRootWidget>0</idWithinRootWidget>
+  <imageFile>/ttsvr/mall/widgetti/icons/bookmark.png</imageFile>
+  <sampleImage>/ttsvr/mall/widgetti/icons/bookmark.png</sampleImage>
+  <label>Hello Wrold</label>
+  <description>Hello World Templates</description>
+  <tab>
+  	<label>Help</label>
+  	<url>https://docs.google.com/document/pub?id=1pWmetrLPe7oa4vS4jwpWtv7SBHuUUVx5TH0j8vL2PLQ&amp;embedded=true</url>
+  </tab>
+   <editableSnippet>
+		<name>cssHeader.css</name>
+		<theme>project</theme>
+	</editableSnippet>
+	<editableSnippet>
+		<name>input.json</name>
+		<theme>project</theme>
+	</editableSnippet>
+   <editableSnippet>
+		<name>jsHeader.js</name>
+		<theme>project</theme>
+	</editableSnippet>
+	<editableSnippet>
+		<name>template.mustache</name>
+		<theme>project</theme>
+	</editableSnippet>
+</widget>

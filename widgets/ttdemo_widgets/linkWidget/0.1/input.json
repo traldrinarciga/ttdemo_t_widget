@@ -1,0 +1,7 @@
+{
+    "scopes": {
+    		"name": "HelloWorldWidget",
+    		"placeholder": "placeholder",
+    		"label": "LinkWidget"
+    }
+}

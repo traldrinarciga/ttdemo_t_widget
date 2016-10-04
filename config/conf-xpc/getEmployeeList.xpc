@@ -1,0 +1,9 @@
+<xpcConfig>
+	<entityType name="getPlaceholder">
+		<description>Get Placeholder</description>
+		<method>
+			<name>get</name>
+			<class>com.tooltwist.ttdemo.xds.GetPlaceholderXDS</class>
+		</method>	
+	</entityType>
+</xpcConfig>
