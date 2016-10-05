@@ -1,5 +1,6 @@
 package com.tooltwist.ttdemo.widgets;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.dinaa.ui.UimData;
@@ -18,32 +19,56 @@ import tooltwist.wbd.WbdException;
 import tooltwist.wbd.WbdGenerator;
 import tooltwist.wbd.WbdGenerator.GenerationMode;
 import tooltwist.wbd.WbdNavPointProperty;
+import tooltwist.wbd.WbdProperty;
 import tooltwist.wbd.WbdRadioTextProperty;
 import tooltwist.wbd.WbdStringProperty;
 import tooltwist.wbd.WbdWidget;
 
 public class LinkWidget extends GenericMustacheWidget {
 	
+	private WbdWidget mInstance;
+	private ArrayList<WbdProperty> mProps;
+	
 	@Override
 	protected void init(WbdWidget instance) throws WbdException{
 		super.init(instance);
-		instance.defineProperty(new WbdStringProperty("label", null, "Label", ""));
-		instance.defineProperty(new WbdStringProperty("url", null, "URL", ""));
-		instance.defineProperty(new WbdNavPointProperty("navpoint", null, "Navpoint", ""));
-		instance.defineProperty(new WbdRadioTextProperty("switcher", null, "Switcher", "URL,Navpoint", "Navpoint"));
-		instance.defineProperty(new WbdRadioTextProperty("target", null, "Target", "Same Page,New Page", "Same Page"));
+		mInstance = instance;
+		mProps = new ArrayList<>();
+		addProp(new WbdStringProperty("label", null, "Label", ""));
+		addProp(new WbdStringProperty("url", null, "URL", ""));
+		addProp(new WbdNavPointProperty("navpoint", null, "Navpoint", ""));
+		addProp(new WbdRadioTextProperty("switcher", null, "Switcher", "URL,Navpoint", "Navpoint"));
+		addProp(new WbdRadioTextProperty("target", null, "Target", "Same Page,New Page", "Same Page"));
 	}
 	
 	@Override
 	public Properties getPropertiesForViewHelper(WbdGenerator generator, WbdWidget instance, UimData ud) throws WbdException {
-		Properties properties = new Properties();
-		properties.setProperty("label", instance.getFinalProperty(generator, "label"));
-		properties.setProperty("url", instance.getFinalProperty(generator, "url"));
-		properties.setProperty("navpoint", RoutingUIM.navpointUrl(ud, instance.getFinalProperty(generator, "navpoint"), AutomaticUrlParametersMode.NO_AUTOMATIC_URL_PARAMETERS));
-		properties.setProperty("switcher", instance.getFinalProperty(generator, "switcher"));
-		properties.setProperty("target", instance.getFinalProperty(generator, "target"));
-		
-		return properties;
+		return generateProps(generator, instance, ud);
+	}
+	
+	private void addProp(WbdProperty property){
+		try {
+			mInstance.defineProperty(property);
+			mProps.add(property);
+		} catch (WbdException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private Properties generateProps(WbdGenerator generator, WbdWidget instance, UimData ud){
+		Properties props = new Properties();
+		for(WbdProperty prop : mProps){
+			try{
+				if(prop instanceof WbdNavPointProperty){
+					props.setProperty(prop.getName(), RoutingUIM.navpointUrl(ud, instance.getFinalProperty(generator, prop.getName()), AutomaticUrlParametersMode.NO_AUTOMATIC_URL_PARAMETERS));
+				}else{
+					props.setProperty(prop.getName(), mInstance.getFinalProperty(generator, prop.getName()));
+				}
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+		}
+		return props;
 	}
 	
 	public void getCodeInserters(WbdGenerator generator, WbdWidget instance, UimData ud, CodeInserterList codeInserterList) throws WbdException {
