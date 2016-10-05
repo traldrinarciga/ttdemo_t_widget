@@ -43,7 +43,7 @@ public class LinkWidget extends GenericMustacheWidget {
 	
 	@Override
 	public Properties getPropertiesForViewHelper(WbdGenerator generator, WbdWidget instance, UimData ud) throws WbdException {
-		return generateProps(generator, instance, ud);
+		return generateProps(generator, ud);
 	}
 	
 	private void addProp(WbdProperty property){
@@ -55,12 +55,12 @@ public class LinkWidget extends GenericMustacheWidget {
 		}
 	}
 	
-	private Properties generateProps(WbdGenerator generator, WbdWidget instance, UimData ud){
+	private Properties generateProps(WbdGenerator generator, UimData ud){
 		Properties props = new Properties();
 		for(WbdProperty prop : mProps){
 			try{
 				if(prop instanceof WbdNavPointProperty){
-					props.setProperty(prop.getName(), RoutingUIM.navpointUrl(ud, instance.getFinalProperty(generator, prop.getName()), AutomaticUrlParametersMode.NO_AUTOMATIC_URL_PARAMETERS));
+					props.setProperty(prop.getName(), RoutingUIM.navpointUrl(ud, mInstance.getFinalProperty(generator, prop.getName()), AutomaticUrlParametersMode.NO_AUTOMATIC_URL_PARAMETERS));
 				}else{
 					props.setProperty(prop.getName(), mInstance.getFinalProperty(generator, prop.getName()));
 				}
